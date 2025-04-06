@@ -5,7 +5,7 @@ from transformers import pipeline
 
 
 class PortraitBlurrer:
-    def __init__(self, max_blur=41, depth_threshold=120, depth_map_output="depth_map.png",
+    def __init__(self, max_blur=41, depth_threshold=120, depth_map_output="./Output/depth_map.png",
                  blurred_output="portrait_blurred.png", feather_strength=15, sharpen_strength=1.2):
         self.max_blur = max_blur  # Max blur kernel size
         self.depth_threshold = depth_threshold  # Threshold for separating subject & background
@@ -94,10 +94,10 @@ class PortraitBlurrer:
 # ----------- DEPTH ESTIMATION & PROCESSING -----------
 
 # Load depth estimation model
-pipe = pipeline(task="depth-estimation", model="depth-anything/Depth-Anything-V2-Large-hf", use_fast=True)
+pipe = pipeline(task="depth-estimation", model="depth-anything/Depth-Anything-V2-Large-hf")
 
 # Load image
-img_path = "/mnt/D/Data_Science/Projects/Depth/Images/img.jpg"
+img_path = "./Images/flat.jpg"
 image = Image.open(img_path)
 
 # Perform depth estimation
@@ -106,7 +106,7 @@ depth_image_pil = output["depth"]
 print("Depth map generated.")
 
 # Initialize and apply portrait blur with sharpening
-portrait_blurrer = PortraitBlurrer(feather_strength=10,
+portrait_blurrer = PortraitBlurrer(max_blur=31,feather_strength=3,
                                    sharpen_strength=1,
-                                   blurred_output="portrait_blurred_test4.png")  # Adjust sharpen_strength as needed
+                                   blurred_output="./Output/portrait_blurred.png")  # Adjust sharpen_strength as needed
 portrait_blurrer.process_image(img_path, depth_image_pil)

@@ -205,7 +205,7 @@ with st.sidebar: # Use 'with' notation for clarity
     st.markdown("---") # Separator
     st.markdown("**Adjust Parameters:**")
     slider_max_blur = st.slider("Blur Intensity (Kernel Size)", min_value=3, max_value=101, step=2, value=31)
-    slider_depth_thr = st.slider("Subject Depth Threshold (Lower=Closer)", min_value=1, max_value=254, step=1, value=120)
+    slider_depth_thr = st.slider("Subject Depth Threshold (Lower=Far away)", min_value=1, max_value=254, step=1, value=120)
     slider_feather = st.slider("Feathering (Mask Smoothness)", min_value=1, max_value=51, step=2, value=5) # <-- Default changed to 5
     # REMOVED: slider_sharpen = st.slider("Subject Sharpening Strength", min_value=0.0, max_value=2.5, step=0.1, value=1.0)
     st.markdown("---") # Separator
